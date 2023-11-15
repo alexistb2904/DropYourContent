@@ -17,7 +17,7 @@ DropYourContent est une application web de réseau social permettant aux utilisa
 - **Backend:** PHP
 - **Base de Données:** MySQL
 - **Messagerie en Temps Réel:** WebSockets
-- 
+
 ## Licence
 
 Ce projet est sous licence MIT. Veuillez consulter le fichier `LICENSE` pour plus de détails.

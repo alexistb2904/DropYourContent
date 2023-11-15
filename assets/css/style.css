@@ -1,0 +1,302 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	position: relative;
+}
+
+/* Login / Sign Up Page */
+
+.connection-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100dvw;
+	height: 100dvh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	backdrop-filter: blur(10px);
+	z-index: 100;
+}
+
+.connection-modal-close {
+	width: 80%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.connection-modal-close i {
+	color: red;
+	font-size: 2rem;
+	cursor: pointer;
+}
+
+@keyframes fear-shake {
+	0% {
+		transform: translateX(0);
+	}
+
+	25% {
+		transform: translateX(-2%) translateY(2%);
+	}
+
+	50% {
+		transform: translateX(2%) translateY(-2%);
+	}
+
+	75% {
+		transform: translateX(-2%) translateY(2%);
+	}
+
+	100% {
+		transform: translateX(0);
+	}
+}
+
+.connection-modal-close i:hover {
+	animation: fear-shake 0.25s ease infinite;
+}
+
+.connection-modal-content {
+	background-color: white;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+	align-items: center;
+	font-size: 2vmax;
+	width: 40%;
+	height: 80%;
+	border-radius: 2vmax;
+	font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+		"Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.connection-modal div:last-child {
+	text-align: center;
+}
+
+.error-message {
+	display: none;
+	color: red;
+	font-size: 0.6rem;
+	font-weight: 600;
+}
+
+.connection-modal form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	height: 80%;
+	width: 60%;
+}
+
+.connection-modal form label {
+	width: 100%;
+	font-size: 1rem;
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	margin: 0 2% 0 2%;
+}
+
+#password-label span {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+#password-label span i {
+	cursor: pointer;
+}
+
+.connection-modal form label input {
+	width: 100%;
+	border: 0.1rem solid black;
+	border-radius: 1rem;
+	padding: 3%;
+	font-size: 1rem;
+	font-weight: 600;
+	margin: 2% 0 2% 0;
+}
+
+.connection-modal form label input:focus,
+.connection-modal form label input:active,
+.connection-modal form label input:hover {
+	outline: none;
+	border: 0.1rem solid #8495ca;
+}
+
+.connection-modal form button {
+	background-color: transparent;
+	border: 0.1rem solid black;
+	border-radius: 1rem;
+	padding: 5%;
+	font-size: 1rem;
+	font-weight: 600;
+	margin: 2%;
+	color: black;
+	cursor: pointer;
+	transition: 0.5s ease;
+}
+
+.connection-modal form button:hover {
+	border: 0.1rem solid #8495ca;
+	background-color: #8495ca;
+	color: white;
+}
+
+#success-image {
+	width: 50%;
+}
+
+.loader-blob {
+	width: 88px;
+	height: 88px;
+	border-radius: 50%;
+	background: radial-gradient(farthest-side, #8495ca 94%, #0000) top/14.1px 14.1px no-repeat,
+		conic-gradient(#0000 30%, #8495ca);
+	-webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 14.1px), #000 0);
+	animation: spinner-c7wet2 1s infinite linear;
+}
+
+#disconnectButton {
+	background-color: transparent;
+	border: 0.1rem solid rgb(130, 0, 0);
+	border-radius: 1rem;
+	padding: 5%;
+	font-size: 1rem;
+	font-weight: 600;
+	margin: 2%;
+	color: rgb(130, 0, 0);
+	cursor: pointer;
+	transition: 0.5s ease;
+}
+
+#disconnectButton:hover {
+	color: white;
+	background-color: rgb(130, 0, 0);
+}
+
+@keyframes spinner-c7wet2 {
+	100% {
+		transform: rotate(1turn);
+	}
+}
+
+.redirect-connection {
+	font-size: 1vmax;
+}
+
+nav div {
+	padding: 2%;
+	width: 50%;
+	display: flex;
+	gap: 1vw;
+	align-items: center;
+	font-size: 2rem;
+	font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+		"Open Sans", "Helvetica Neue", sans-serif;
+	font-weight: 600;
+	color: #fcc78a;
+}
+
+nav div img {
+	width: 10%;
+	height: 10%;
+}
+
+#home-page {
+	background-color: #8495ca;
+	height: 100dvh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.home-text {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+	font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+		"Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.home-text-div img {
+	width: 20%;
+	animation: floatAnimation 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatAnimation {
+	0% {
+		transform: translateY(5%) translateX(1%);
+	}
+	50% {
+		transform: translateY(-2.5%) translateX(-1%);
+	}
+	100% {
+		transform: translateY(5%) translateX(1%);
+	}
+}
+
+.home-text-div h1 {
+	font-size: 3rem;
+	font-weight: 800;
+	color: #fcc78a;
+}
+
+.home-text-div p {
+	font-size: 1.5rem;
+	font-weight: 600;
+	text-wrap: balance;
+	color: #fcc78a;
+}
+
+#connection-button a {
+	text-decoration: none;
+}
+
+#connection-button .log-in-button button {
+	background-color: #fcc78a;
+	border: 0.2rem solid transparent;
+	border-radius: 1rem;
+	padding: 1%;
+	font-size: 1.5rem;
+	font-weight: 600;
+	margin: 1%;
+	color: #8495ca;
+	cursor: pointer;
+	transition: 0.5s ease;
+}
+
+#connection-button .log-in-button button:hover {
+	background-color: transparent;
+	border: 0.2rem solid #fcc78a;
+	color: #fcc78a;
+}
+
+#connection-button .sign-up-button button {
+	background-color: transparent;
+	border: 0.2rem solid #fcc78a;
+	color: #fcc78a;
+	border-radius: 1rem;
+	padding: 1%;
+	margin: 1%;
+	font-size: 1.5rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: 0.5s ease;
+}
+
+#connection-button .sign-up-button button:hover {
+	background-color: #fcc78a;
+	border: 0.2rem solid transparent;
+	color: #8495ca;
+}

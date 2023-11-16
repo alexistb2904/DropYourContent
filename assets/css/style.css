@@ -8,7 +8,7 @@ body {
 	position: relative;
 }
 
-/* Login / Sign Up Page */
+/* Login / Sign Up Page Javascript */
 
 .connection-modal {
 	position: fixed;
@@ -69,10 +69,10 @@ body {
 	align-items: center;
 	font-size: 2vmax;
 	width: 40%;
-	height: 80%;
+	height: 90%;
 	border-radius: 2vmax;
-	font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-		"Open Sans", "Helvetica Neue", sans-serif;
+	box-shadow: 0 0 2vmax 0 rgba(0, 0, 0, 0.5);
+	font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .connection-modal div:last-child {
@@ -119,10 +119,10 @@ body {
 	width: 100%;
 	border: 0.1rem solid black;
 	border-radius: 1rem;
-	padding: 3%;
+	padding: 2%;
 	font-size: 1rem;
 	font-weight: 600;
-	margin: 2% 0 2% 0;
+	margin: 2% 0 1% 0;
 }
 
 .connection-modal form label input:focus,
@@ -159,8 +159,7 @@ body {
 	width: 88px;
 	height: 88px;
 	border-radius: 50%;
-	background: radial-gradient(farthest-side, #8495ca 94%, #0000) top/14.1px 14.1px no-repeat,
-		conic-gradient(#0000 30%, #8495ca);
+	background: radial-gradient(farthest-side, #8495ca 94%, #0000) top/14.1px 14.1px no-repeat, conic-gradient(#0000 30%, #8495ca);
 	-webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 14.1px), #000 0);
 	animation: spinner-c7wet2 1s infinite linear;
 }
@@ -193,20 +192,21 @@ body {
 	font-size: 1vmax;
 }
 
-nav div {
+/* Home / Login Page  */
+
+#home-page nav div {
 	padding: 2%;
 	width: 50%;
 	display: flex;
 	gap: 1vw;
 	align-items: center;
 	font-size: 2rem;
-	font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-		"Open Sans", "Helvetica Neue", sans-serif;
+	font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	font-weight: 600;
 	color: #fcc78a;
 }
 
-nav div img {
+#home-page nav div img {
 	width: 10%;
 	height: 10%;
 }
@@ -225,8 +225,7 @@ nav div img {
 	justify-content: center;
 	flex-direction: column;
 	text-align: center;
-	font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-		"Open Sans", "Helvetica Neue", sans-serif;
+	font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .home-text-div img {
@@ -299,4 +298,123 @@ nav div img {
 	background-color: #fcc78a;
 	border: 0.2rem solid transparent;
 	color: #8495ca;
+}
+
+/* Real Home Page */
+
+#base-page {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 100dvh;
+}
+
+#base-page nav {
+	width: 25%;
+	background: linear-gradient(180deg, #fff 72.4%, #bcbcbc 100%);
+}
+
+#base-page aside {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.profile-side {
+	position: relative;
+	height: 35vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	overflow: hidden;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.profile-name {
+	position: absolute;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 2% 5% 2% 5%;
+	gap: 2%;
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	align-items: center;
+}
+
+.profile-name img {
+	width: 15%;
+	border-radius: 1vmax;
+}
+
+.profile-name ul {
+	list-style: none;
+	font-family: 'Montserrat', sans-serif;
+	color: white;
+}
+
+.navigation-side {
+	height: 65vh;
+	display: flex;
+	flex-direction: column;
+	padding: 5%;
+	justify-content: space-between;
+}
+
+.navigation-side ul {
+	list-style: none;
+	font-family: 'Montserrat', sans-serif;
+	color: black;
+	font-size: 1.25rem;
+}
+
+.navigation-side ul li {
+	margin-top: 2%;
+	transition: 0.5s ease;
+}
+
+.navigation-side ul a {
+	text-decoration: none;
+	color: black;
+}
+
+.button-nav i {
+	padding: 3%;
+	margin-right: 2%;
+	border-radius: 1rem;
+	background-color: #eaeaea;
+	transition: 0.5s ease;
+}
+
+.button-nav li:nth-child(2) i {
+	font-size: 1.5rem;
+}
+
+.button-nav li:hover {
+	cursor: pointer;
+}
+
+.button-nav li:hover i {
+	background-color: #d3d3d3;
+	transform: scale(1.1);
+}
+
+.navigation-side ul:last-child li {
+	background-color: #eaeaea;
+	padding: 2%;
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	border-radius: 1rem;
+	cursor: pointer;
+}
+
+.navigation-side ul:last-child li i {
+	margin-right: 2%;
+}
+
+.navigation-side ul:last-child li:hover {
+	background-color: #d3d3d3;
 }

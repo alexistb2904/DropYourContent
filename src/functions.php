@@ -80,3 +80,25 @@ function getId($username): array
     }
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function getUserProfilePicture($username): string
+{
+    if ($username) {
+        $query = $GLOBALS['mysqlClientPDO']->prepare('SELECT user_profile_picture FROM users WHERE user_name = :username');
+        $query->execute([
+            'username' => $username
+        ]);
+    }
+    return $query->fetchAll(PDO::FETCH_ASSOC)[0]['user_profile_picture'];
+}
+
+function getUserBackgroundPicture($username): string
+{
+    if ($username) {
+        $query = $GLOBALS['mysqlClientPDO']->prepare('SELECT user_background_picture FROM users WHERE user_name = :username');
+        $query->execute([
+            'username' => $username
+        ]);
+    }
+    return $query->fetchAll(PDO::FETCH_ASSOC)[0]['user_background_picture'];
+}

@@ -32,10 +32,11 @@ function checkCombination($username, $password)
         $users = $userWithNameRequest->fetchAll();
         foreach ($users as $user) {
             if (htmlspecialchars($user['user_name']) === htmlspecialchars($username) && password_verify($password, htmlspecialchars($user['user_password']))) {
-                $loggedUser = ['logged' => true, 'user_name' => htmlspecialchars($user['user_name']), 'user_email' => htmlspecialchars($user['user_email'])];
+                $loggedUser = ['logged' => true, 'user_name' => htmlspecialchars($user['user_name']), 'user_name_full' => htmlspecialchars($user['user_name_full']), 'user_email' => htmlspecialchars($user['user_email'])];
                 $_SESSION['isLogged'] = $loggedUser['logged'];
                 $_SESSION['user_name'] = $loggedUser['user_name'];
                 $_SESSION['user_email'] = $loggedUser['user_email'];
+                $_SESSION['user_name_full'] = $loggedUser['user_name_full'];
                 return true;
             } else {
                 return false;

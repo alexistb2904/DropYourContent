@@ -45,6 +45,8 @@ startSession();
                 <?php if (isLogged()): ?>
                     <p>Bienvenue sur DropYourContent
                         <?php echo $_SESSION['user_name'] ?> !
+                        <br>Tu va être redirigé dans quelques instants..
+                        <?php header('Refresh: 3; URL=accueil/index.php'); ?>
                     </p>
                 <?php else: ?>
                     <p>Notre application te permettra de faire un tas de nouvelles rencontre alors rejoins-nous maintenant !

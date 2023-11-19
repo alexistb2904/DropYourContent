@@ -56,15 +56,21 @@ startSession();
 				</div>
 				<div class="navigation-side">
 					<ul class="button-nav">
-						<a href="">
-							<li><i class="fa-solid fa-house" style="color: #21A10C;"></i>Page Accueil</li>
-						</a>
-						<a href="">
-							<li><i class="fa-solid fa-user" style="color: #2353CF;"></i>Amis</li>
-						</a>
-						<a href="">
-							<li><i class="fa-solid fa-magnifying-glass" style="color: #E3621A;"></i>Recherche</li>
-						</a>
+						<li>
+							<a href="">
+								<i class="fa-solid fa-house" style="color: #21A10C;"></i>Page Accueil
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<i class="fa-solid fa-user" style="color: #2353CF;"></i>Amis
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<i class="fa-solid fa-magnifying-glass" style="color: #E3621A;"></i>Recherche
+							</a>
+						</li>
 					</ul>
 					<ul>
 						<a href="">

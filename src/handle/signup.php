@@ -52,7 +52,7 @@ function checkRegex($regex, $string)
     if ($regex == "username") {
         return preg_match('/^[a-zA-Z0-9_-]+$/', $string) === 1;
     } elseif ($regex == "name") {
-        return preg_match("/^[\w\'\-,.\s][^0-9_!¡?÷?¿\/\\\\+=@#$%^&*(){}|~<>;:[\]]{2,}$/u", $string) === 1;
+        return preg_match("/^[\w'\-,.][^0-9_!¡?÷?¿\/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}/", $string) === 1;
     } elseif ($regex == "email") {
         return preg_match('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/', $string) === 1;
     } elseif ($regex == "password") {
@@ -170,9 +170,9 @@ function Register($username, $name, $email, $password)
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = $_POST;
-    $username = htmlspecialchars($data["username"], ENT_QUOTES, 'UTF-8');
+    $username = strtolower(htmlspecialchars($data["username"], ENT_QUOTES, 'UTF-8'));
     $name = htmlspecialchars($data["name"], ENT_QUOTES, 'UTF-8');
-    $email = htmlspecialchars($data["email"], ENT_QUOTES, 'UTF-8');
+    $email = strtolower(htmlspecialchars($data["email"], ENT_QUOTES, 'UTF-8'));
     $password = htmlspecialchars(password_hash($data["password"], PASSWORD_DEFAULT), ENT_QUOTES, 'UTF-8');
     $imageWidth1 = intval(htmlspecialchars($data["imageWidth1"], ENT_QUOTES, 'UTF-8'));
     $imageWidth2 = intval(htmlspecialchars($data["imageWidth2"], ENT_QUOTES, 'UTF-8'));

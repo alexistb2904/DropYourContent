@@ -2,6 +2,13 @@
 const BY_SERVER = true;
 include_once '../src/functions.php';
 
+$integrityLogin = '../assets/js/login.js';
+$integrityFeed = '../assets/js/feed.js';
+$integrityStyle = '../assets/css/style.css';
+
+$hashLogin = hash_file('sha256', $integrityLogin);
+$hashFeed = hash_file('sha256', $integrityFeed);
+$hashStyle = hash_file('sha256', $integrityStyle);
 startSession();
 
 ?>
@@ -25,7 +32,7 @@ startSession();
 	<!-- Balise de Favicon (Logo) -->
 	<link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
 	<!-- Balise de CSS -->
-	<link rel="stylesheet" href="../assets/css/style.css">
+	<link rel="stylesheet" href="../assets/css/style.css" crossorigin="anonymous" integrity="<?php echo $hashStyle ?>">
 	<script src="https://kit.fontawesome.com/e1413d4c65.js" crossorigin="anonymous"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +46,8 @@ startSession();
 			<aside>
 				<div class="profile-side" style='background-image: url("../<?php echo getUserBackgroundPicture($_SESSION['user_name']) ?>")'>
 					<div class="profile-name">
-						<img src="../<?php echo getUserProfilePicture($_SESSION['user_name']) ?>" alt="">
+						<div class="profile-image" style='background-image: url("../<?php echo getUserProfilePicture($_SESSION['user_name']) ?>")'>
+						</div>
 						<ul>
 							<li>
 								<h2>
@@ -97,27 +105,37 @@ startSession();
 				$countOfPost = 0;
 				foreach (getPosts() as $post) {
 					$countOfPost++ ?>
-					<div class="feed-card">
+					<div class="feed-card" id="<?php echo $post['id'] ?>">
 						<div class="feed-header">
-							<span class="feed-span">
-								<div class="feed-image" style="background-image :url(../<?php echo getUserProfilePicture($post['creator_user_name']) ?>)">
+							<a href="../profile/?user=<?php echo getUserByUsername($post['creator_user_name'])[0]['user_name'] ?>">
+								<span class="feed-span">
+									<div class="feed-image" style="background-image :url(../<?php echo getUserProfilePicture($post['creator_user_name']) ?>)">
+									</div>
+									<div class="feed-name">
+										<span>
+											<?php echo getUserByUsername($post['creator_user_name'])[0]['user_name_full'] ?>
+										</span><br>
+										<span>
+											<?php echo "@" . getUserByUsername($post['creator_user_name'])[0]['user_name'] ?>
+										</span>
+									</div>
+								</span>
+							</a>
+							<?php if ($post['creator_user_name'] == $_SESSION['user_name']) { ?>
+								<div class="feed-dots">
+									<i class="fa-solid fa-ellipsis"></i>
+									<div class="feed-dropdown">
+										<span onclick="deletePost(<?php echo $post['id'] ?>)"><i class="fa-solid fa-trash"></i> Supprimer</span>
+									</div>
 								</div>
-								<div class="feed-name">
-									<span>
-										<?php echo getUserByUsername($post['creator_user_name'])[0]['user_name_full'] ?>
-									</span><br>
-									<span>@
-										<?php echo getUserByUsername($post['creator_user_name'])[0]['user_name'] ?>
-									</span>
+							<?php } else { ?>
+								<div class="feed-dots">
+									<i class="fa-solid fa-ellipsis"></i>
+									<div class="feed-dropdown">
+										<span><i class="fa-regular fa-circle-user"></i> Aller sur le profil</span>
+									</div>
 								</div>
-							</span>
-							<div class="feed-dots">
-								<i class="fa-solid fa-ellipsis"></i>
-								<div class="feed-dropdown">
-									<span><i class="fa-solid fa-pencil"></i> Modifier</span>
-									<span><i class="fa-solid fa-trash"></i> Supprimer</span>
-								</div>
-							</div>
+							<?php } ?>
 						</div>
 						<div class="feed-image">
 							<img src="../<?php echo $post['image'] ?>" alt="">
@@ -125,6 +143,7 @@ startSession();
 						<div class="feed-content">
 							<?php echo $post['content'] ?>
 						</div>
+						<hr>
 						<div class="feed-information">
 							<span class="feed-span">
 								<div class="feed-likes">
@@ -133,7 +152,7 @@ startSession();
 									<?php } else { ?>
 										<i class="fa-solid fa-heart" onclick="likePost(event, <?php echo $post['id'] ?>)"></i>
 									<?php } ?>
-									<span id="<?php echo $post['id'] ?>">
+									<span>
 										<?php echo count(getLikesOfPost($post['id'])) ?>
 									</span>
 								</div>
@@ -177,8 +196,8 @@ startSession();
 			}, 5000);
 		</script>
 	<?php } ?>
-	<script src="../assets/js/login.js"></script>
-	<script src="../assets/js/feed.js"></script>
+	<script src="../assets/js/login.js" crossorigin="anonymous" integrity="<?php echo $hashLogin ?>"></script>
+	<script src="../assets/js/feed.js" crossorigin="anonymous" integrity="<?php echo $hashFeed ?>"></script>
 </body>
 
 </html>

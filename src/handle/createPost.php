@@ -49,12 +49,16 @@ function UploadImage($image, $username, $imageWidth1)
             $image = imagecreatefromgif($file_path . '.' . $extension);
             imagepalettetotruecolor($image);
             break;
+        case 'webp':
+            $image = imagecreatefromwebp($file_path . '.' . $extension);
+            $imageWebp = true;
+            break;
         default:
             $image = false;
             break;
     }
 
-    if ($image == true) {
+    if ($image == true || $imageWebp == true) {
         // Créez un chemin pour l'image WebP
         $webp_file_path = $folder_path . '/' . $file_name . '.webp';
         // Convertir l'image en WebP
@@ -65,7 +69,9 @@ function UploadImage($image, $username, $imageWidth1)
         // Libération de la mémoire
         imagedestroy($image);
         // Suppression du fichier original
-        unlink($file_path . '.' . $extension);
+        if (!$imageWebp) {
+            unlink($file_path . '.' . $extension);
+        }
         return true;
 
     } else {

@@ -87,7 +87,7 @@ function getPosts($username = null): array
         $query = $GLOBALS['mysqlClientPDO']->prepare('SELECT * FROM posts ORDER BY creation_date DESC');
         $query->execute();
     } else {
-        $query = $GLOBALS['mysqlClientPDO']->prepare('SELECT * FROM posts WHERE creator_user_name = :username ORDER BY timestamp DESC');
+        $query = $GLOBALS['mysqlClientPDO']->prepare('SELECT * FROM posts WHERE creator_user_name = :username ORDER BY creation_date DESC');
         $query->execute([
             'username' => $username
         ]);

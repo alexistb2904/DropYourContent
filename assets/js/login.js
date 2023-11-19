@@ -139,10 +139,7 @@ function showLogin(isLogged = false) {
 		}
 		fetch('../src/handle/login.php', {
 			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ username: username, password: password }),
+			body: formData,
 		})
 			.then((response) => response.json())
 			.then((json) => {
@@ -162,7 +159,7 @@ function showLogin(isLogged = false) {
 					modalContent.appendChild(successMessage);
 					setTimeout(function () {
 						connectionModal.remove();
-						window.location.href = '../accueil/index.php';
+						window.location.href = '../accueil/';
 					}, 3000);
 				}
 			})
@@ -317,7 +314,7 @@ function showSignUp(isLogged = false) {
 	signUpForm.addEventListener('submit', function (e) {
 		e.preventDefault(); // Empêcher le rechargement de la page
 		// Initialisation des variables
-		const regexName = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+		const regexName = /^[\w'\-,.][^0-9_!¡?÷?¿\/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}/;
 		const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 		const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*[;'"`\\]).{6,}$/;
 		const ProfilePictureInput = document.getElementById('ProfilePictureInput');

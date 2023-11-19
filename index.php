@@ -4,6 +4,12 @@ include_once 'src/functions.php';
 
 startSession();
 
+$integrityLogin = '../assets/js/login.js';
+$integrityStyle = '../assets/css/style.css';
+
+$hashLogin = hash_file('sha256', $integrityLogin);
+$hashStyle = hash_file('sha256', $integrityStyle);
+
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +31,7 @@ startSession();
     <!-- Balise de Favicon (Logo) -->
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <!-- Balise de CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css" crossorigin="anonymous" integrity="<?php echo $hashStyle ?>">
     <script src="https://kit.fontawesome.com/e1413d4c65.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,7 +72,7 @@ startSession();
     <footer>
 
     </footer>
-    <script src="assets/js/login.js"></script>
+    <script src="assets/js/login.js" crossorigin="anonymous" integrity="<?php echo $hashLogin ?>"></script>
 </body>
 
 </html>

@@ -30,26 +30,30 @@ function checkCombination($username, $password)
         $userWithNameRequest = $GLOBALS['mysqlClientPDO']->prepare('SELECT * FROM users');
         $userWithNameRequest->execute();
         $users = $userWithNameRequest->fetchAll();
+        $goodCombination = false;
         foreach ($users as $user) {
-            if (htmlspecialchars($user['user_name']) === htmlspecialchars($username) && password_verify($password, htmlspecialchars($user['user_password']))) {
+            if ((htmlspecialchars($user['user_name']) === htmlspecialchars($username)) && (password_verify(htmlspecialchars($password), htmlspecialchars($user['user_password'])))) {
                 $loggedUser = ['logged' => true, 'user_name' => htmlspecialchars($user['user_name']), 'user_name_full' => htmlspecialchars($user['user_name_full']), 'user_email' => htmlspecialchars($user['user_email'])];
                 $_SESSION['isLogged'] = $loggedUser['logged'];
                 $_SESSION['user_name'] = $loggedUser['user_name'];
                 $_SESSION['user_email'] = $loggedUser['user_email'];
                 $_SESSION['user_name_full'] = $loggedUser['user_name_full'];
-                return true;
+                $goodCombination = true;
+                break;
             } else {
-                return false;
+                $goodCombination = false;
             }
         }
+
+        return $goodCombination;
     } else {
         return false;
     }
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $data = json_decode(file_get_contents('php://input'), true);
-    $username = htmlspecialchars($data["username"], ENT_QUOTES, 'UTF-8');
+    $data = $_POST;
+    $username = strtolower(htmlspecialchars($data["username"], ENT_QUOTES, 'UTF-8'));
     $password = htmlspecialchars($data["password"], ENT_QUOTES, 'UTF-8');
 
     if (!checkExist($username)) {

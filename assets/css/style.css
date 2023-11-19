@@ -179,6 +179,7 @@ body {
 	border-radius: 50%;
 	background: radial-gradient(farthest-side, #8495ca 94%, #0000) top/14.1px 14.1px no-repeat, conic-gradient(#0000 30%, #8495ca);
 	-webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 14.1px), #000 0);
+	mask: radial-gradient(farthest-side, #0000 calc(100% - 14.1px), #000 0);
 	animation: spinner-c7wet2 1s infinite linear;
 }
 
@@ -212,7 +213,12 @@ body {
 
 /* Home / Login Page  */
 
-#home-page nav div {
+#home-page header nav {
+	width: 100%;
+	background: #8495ca;
+}
+
+#home-page header nav div {
 	padding: 2%;
 	width: 50%;
 	display: flex;
@@ -224,7 +230,7 @@ body {
 	color: #fcc78a;
 }
 
-#home-page nav div img {
+#home-page header nav div img {
 	width: 10%;
 	height: 10%;
 }
@@ -320,19 +326,20 @@ body {
 
 /* Real Home Page */
 
-#base-page {
+#base-page,
+#profile-page {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	height: 100dvh;
 }
 
-#base-page nav {
+nav {
 	width: 25%;
 	background: linear-gradient(180deg, #fff 72.4%, #bcbcbc 100%);
 }
 
-#base-page aside {
+aside {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -353,6 +360,7 @@ body {
 .profile-name {
 	position: absolute;
 	bottom: 0;
+	width: 100%;
 	background-color: rgba(0, 0, 0, 0.5);
 	padding: 2% 5% 2% 5%;
 	gap: 2%;
@@ -362,8 +370,13 @@ body {
 	align-items: center;
 }
 
-.profile-name img {
-	width: 15%;
+.profile-name .profile-image {
+	width: 3vmax;
+	height: 3vmax;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	overflow: hidden;
 	border-radius: 1vmax;
 }
 
@@ -371,6 +384,7 @@ body {
 	list-style: none;
 	font-family: 'Montserrat', sans-serif;
 	color: white;
+	font-size: 100%;
 }
 
 .navigation-side {
@@ -439,7 +453,8 @@ body {
 
 /* Feed Page */
 
-.feed {
+.feed,
+.profile-page {
 	padding: 1% 0 0 0;
 	width: 75%;
 	display: flex;
@@ -596,7 +611,9 @@ body {
 	gap: 3vmax;
 }
 
-.main-feed .feed-card {
+/* Feed Card | Carte des Post */
+
+.feed-card {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -609,7 +626,7 @@ body {
 	font-family: 'Montserrat', sans-serif;
 }
 
-.main-feed .feed-card .feed-header {
+.feed-card .feed-header {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -617,7 +634,7 @@ body {
 	padding: 0 0 1% 0;
 }
 
-.main-feed .feed-card .feed-header .feed-image {
+.feed-card .feed-header .feed-image {
 	width: 3vmax;
 	height: 3vmax;
 	border-radius: 50%;
@@ -626,25 +643,35 @@ body {
 	background-repeat: no-repeat;
 }
 
-.main-feed .feed-card .feed-header .feed-span {
+.feed-card .feed-header .feed-span {
 	display: inline-flex;
 	align-items: center;
 	gap: 2%;
+	width: 100%;
+}
+
+.feed-card .feed-header a {
+	text-decoration: none;
+	color: black;
 	width: 80%;
 }
 
-.main-feed .feed-card .feed-header .feed-span .feed-name span:last-child {
+.feed-card .feed-header a:hover {
+	color: #8495ca;
+}
+
+.feed-card .feed-header .feed-span .feed-name span:last-child {
 	font-size: 0.75rem;
 }
 
-.main-feed .feed-card .feed-header .feed-dots {
+.feed-card .feed-header .feed-dots {
 	color: #a5a5a5;
 	font-size: 1.5rem;
 	cursor: pointer;
 	position: relative;
 }
 
-.main-feed .feed-card .feed-header .feed-dots .feed-dropdown {
+.feed-card .feed-header .feed-dots .feed-dropdown {
 	position: absolute;
 	top: 15%;
 	right: -50%;
@@ -661,33 +688,37 @@ body {
 	display: none;
 }
 
-.main-feed .feed-card .feed-header .feed-dots .feed-dropdown span:hover {
-	background-color: #f0f0f0;
+.feed-card .feed-header .feed-dots .feed-dropdown span:hover {
+	color: #8495ca;
 }
 
-.main-feed .feed-card .feed-header .feed-dots .feed-dropdown span {
+.feed-card .feed-header .feed-dots .feed-dropdown span {
 	padding: 2%;
 	transition: 0.5s ease;
 }
 
-.main-feed .feed-card .feed-header .feed-dots:hover .feed-dropdown,
-.main-feed .feed-card .feed-header .feed-dots .feed-dropdown:hover {
+.feed-card .feed-header .feed-dots:hover .feed-dropdown,
+.feed-card .feed-header .feed-dots .feed-dropdown:hover {
 	display: flex;
 }
 
-.main-feed .feed-card .feed-image {
+.feed-card .feed-image {
 	width: 100%;
 }
 
-.main-feed .feed-card .feed-image img {
+.feed-card .feed-image img {
 	width: 100%;
 }
 
-.main-feed .feed-card .feed-content {
+.feed-card .feed-content {
 	padding: 1% 0;
 }
 
-.main-feed .feed-card .feed-information {
+.feed-card hr {
+	width: 100%;
+}
+
+.feed-card .feed-information {
 	margin: 1% 0;
 	display: flex;
 	flex-direction: row;
@@ -696,12 +727,12 @@ body {
 	font-size: 1.25rem;
 }
 
-.main-feed .feed-card .feed-information .feed-date {
+.feed-card .feed-information .feed-date {
 	font-size: 0.75rem;
 }
 
-.feed-card .feed-likes span {
-	transition: 0.25s ease;
+.feed-card .feed-likes i {
+	transition: 0.5s ease;
 }
 
 @keyframes likeAnimation {
@@ -709,7 +740,95 @@ body {
 		transform: scale(1);
 	}
 
-	100% {
+	50% {
 		transform: scale(1.25);
 	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+/* Fin Feed Card et Feed Page*/
+
+/* Page Profil */
+
+.profile-page {
+	padding: 0;
+}
+
+.profile-main {
+	position: relative;
+	height: 35vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	overflow: hidden;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.profile-main .profile-background {
+	width: 100%;
+	height: 100%;
+}
+
+.profile-main .profile-name {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 2% 5% 2% 5%;
+	gap: 2%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.profile-main .profile-name span {
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	align-items: center;
+	width: 80%;
+	gap: 2%;
+}
+
+.profile-main .profile-name img {
+	width: 7%;
+	border-radius: 1vmax;
+}
+
+.profile-main .profile-name ul {
+	list-style: none;
+	font-family: 'Montserrat', sans-serif;
+	color: white;
+}
+
+.profile-main .profile-name .profile-button {
+	background-color: transparent;
+	border: 0.1rem solid white;
+	border-radius: 1rem;
+	padding: 1%;
+	font-size: 1rem;
+	font-weight: 600;
+	margin: 1%;
+	color: white;
+	cursor: pointer;
+	transition: 0.5s ease;
+}
+
+.profile-main .profile-name .profile-button:hover,
+.profile-main .profile-name .profile-button:focus,
+.profile-main .profile-name .profile-button:active {
+	background-color: white;
+	border: 0.1rem solid transparent;
+	color: #8495ca;
+}
+
+.profile-page .main-feed {
+	height: 45%;
 }

@@ -78,10 +78,10 @@ creatorForm.addEventListener('submit', function (e) {
 						ErrorFormMessage.innerHTML = "L'image ne doit pas dépasser 5Mo JAVA";
 						console.log("L'image ne doit pas dépasser 5Mo JAVA");
 						imageCheck1 = false;
-					} else if ($image.type !== 'image/png' && $image.type !== 'image/jpeg' && $image.type !== 'image/jpg') {
+					} else if ($image.type !== 'image/png' && $image.type !== 'image/jpeg' && $image.type !== 'image/jpg' && $image.type !== 'image/webp') {
 						ErrorFormMessage.style.display = 'block';
-						ErrorFormMessage.innerHTML = "L'image doit être au format png ou jpg";
-						console.log("L'image doit être au format png ou jpg");
+						ErrorFormMessage.innerHTML = "L'image doit être au format png, jpg ou webp";
+						console.log("L'image doit être au format png, jpg ou webp");
 						imageCheck1 = false;
 					} else if (img.width > 4096 || img.height > 4096) {
 						ErrorFormMessage.style.display = 'block';
@@ -231,15 +231,45 @@ function likePost(event, $postId) {
 				console.log('Like supprimé');
 				event.target.style.color = '';
 
-				document.querySelector(`.feed-card .feed-likes span[id='${postID}']`).innerHTML = +document.querySelector(`.feed-card .feed-likes span[id='${postID}']`).innerHTML - 1;
-				document.querySelector(`.feed-card .feed-likes span[id='${postID}']`).style.animation = '';
-				document.querySelector(`.feed-card .feed-likes span[id='${postID}']`).style.animation = 'likeAnimation 0.5s ease forwards;';
+				document.querySelector(`.feed-card[id='${postID}'] .feed-likes span`).innerHTML = +document.querySelector(`.feed-card[id='${postID}'] .feed-likes span`).innerHTML - 1;
+				event.target.style.animation = '1s ease 0s 1 normal none running likeAnimation';
+				setTimeout(function () {
+					event.target.style.animation = '';
+				}, 1000);
 			} else {
 				console.log('Like ajouté');
 				event.target.style.color = 'red';
-				document.querySelector(`.feed-card .feed-likes span[id='${postID}']`).innerHTML = +document.querySelector(`.feed-card .feed-likes span[id='${postID}']`).innerHTML + 1;
-				document.querySelector(`.feed-card .feed-likes span[id='${postID}']`).style.animation = '';
-				document.querySelector(`.feed-card .feed-likes span[id='${postID}']`).style.animation = 'likeAnimation 0.5s ease forwards;';
+				document.querySelector(`.feed-card[id='${postID}'] .feed-likes span`).innerHTML = +document.querySelector(`.feed-card[id='${postID}'] .feed-likes span`).innerHTML + 1;
+				event.target.style.animation = '1s ease 0s 1 normal none running likeAnimation';
+				setTimeout(function () {
+					event.target.style.animation = '';
+				}, 1000);
+			}
+		})
+		.catch((error) => console.log(error));
+}
+
+function deletePost($postId) {
+	const deleteForm = new FormData();
+	const postID = $postId;
+	deleteForm.append('postId', $postId);
+	fetch('../src/handle/deletePost.php', {
+		method: 'POST',
+		body: deleteForm,
+	})
+		.then((response) => response.json())
+		.then((json) => {
+			if (json.error) {
+				if (json.error === 'notLogged') {
+					alert("Tu n'est pas connecté");
+				} else if (json.error === 'postNotExist') {
+					alert("Le post n'existe pas");
+				} else if (json.error === 'notOwner') {
+					alert("Ce n'est pas ton post");
+				}
+			} else {
+				alert('Post supprimé');
+				document.querySelector(`.feed-card[id='${postID}']`).remove();
 			}
 		})
 		.catch((error) => console.log(error));

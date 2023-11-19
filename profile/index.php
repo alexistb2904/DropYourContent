@@ -14,9 +14,9 @@ $integrityLogin = '../assets/js/login.js';
 $integrityFeed = '../assets/js/feed.js';
 $integrityStyle = '../assets/css/style.css';
 
-$hashLogin = hash_file('sha256', $integrityLogin);
-$hashFeed = hash_file('sha256', $integrityFeed);
-$hashStyle = hash_file('sha256', $integrityStyle);
+$hashLogin = "sha256-" . base64_encode(hash_file('sha256', $integrityLogin, true));
+$hashStyle = "sha256-" . base64_encode(hash_file('sha256', $integrityStyle, true));
+$hashFeed = "sha256-" . base64_encode(hash_file('sha256', $integrityFeed, true));
 
 ?>
 
@@ -117,8 +117,8 @@ $hashStyle = hash_file('sha256', $integrityStyle);
                             </li>
                         </ul>
                     </span>
-                    <button class="profile-button">Ajouter en Amis</button>
-                    <!-- <button class="profile-button">Déjà en Amis</button> -->
+                    <button class="profile-button">Ajouter en Ami</button>
+                    <!-- <button class="profile-button">Déjà en Ami</button> -->
                 </div>
             </div>
             <?php if ($userPage == $_SESSION['user_name']) { ?>

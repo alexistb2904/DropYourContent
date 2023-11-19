@@ -4,12 +4,11 @@ include_once 'src/functions.php';
 
 startSession();
 
-$integrityLogin = '../assets/js/login.js';
-$integrityStyle = '../assets/css/style.css';
+$integrityLogin = 'assets/js/login.js';
+$integrityStyle = 'assets/css/style.css';
 
-$hashLogin = hash_file('sha256', $integrityLogin);
-$hashStyle = hash_file('sha256', $integrityStyle);
-
+$hashLogin = "sha256-" . base64_encode(hash_file('sha256', $integrityLogin, true));
+$hashStyle = "sha256-" . base64_encode(hash_file('sha256', $integrityStyle, true));
 ?>
 
 <!DOCTYPE html>

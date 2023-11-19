@@ -77,8 +77,82 @@ startSession();
 				</div>
 			</aside>
 		</nav>
-		<main>
-
+		<main class="feed">
+			<form class="creator">
+				<label><span><i class="fa-solid fa-message"></i><textarea type="text" name="creator-message" id="creator-message" placeholder="Écrit quelque chose"
+							wrap="soft"></textarea></span><button type="submit" title="Envoyer le Post"><i class="fa-solid fa-paper-plane"></i></button></label>
+				<label><i class="fa-solid fa-camera"></i><span>Ajouter une photo</span><input type="file" name="creator-file" id="creator-file"
+						accept="image/png, image/jpeg, image/jpg, image/webp"><span class="error-message" id="error-form-message">Une Erreur est survenue veuillez
+						réesayer</span></label>
+			</form>
+			<hr>
+			<div class="main-feed">
+				<?php
+				$countOfPost = 0;
+				foreach (getPosts() as $post) {
+					$countOfPost++ ?>
+					<div class="feed-card">
+						<div class="feed-header">
+							<span class="feed-span">
+								<div class="feed-image" style="background-image :url(../<?php echo getUserProfilePicture($post['creator_user_name']) ?>)">
+								</div>
+								<div class="feed-name">
+									<span>
+										<?php echo getUserByUsername($post['creator_user_name'])[0]['user_name_full'] ?>
+									</span><br>
+									<span>@
+										<?php echo getUserByUsername($post['creator_user_name'])[0]['user_name'] ?>
+									</span>
+								</div>
+							</span>
+							<div class="feed-dots">
+								<i class="fa-solid fa-ellipsis"></i>
+								<div class="feed-dropdown">
+									<span><i class="fa-solid fa-pencil"></i> Modifier</span>
+									<span><i class="fa-solid fa-trash"></i> Supprimer</span>
+								</div>
+							</div>
+						</div>
+						<div class="feed-image">
+							<img src="../<?php echo $post['image'] ?>" alt="">
+						</div>
+						<div class="feed-content">
+							<?php echo $post['content'] ?>
+						</div>
+						<div class="feed-information">
+							<span class="feed-span">
+								<div class="feed-likes">
+									<?php if (isLiked($post['id'], $_SESSION['user_name'])) { ?>
+										<i class="fa-solid fa-heart" style="color: red" onclick="likePost(event, <?php echo $post['id'] ?>)"></i>
+									<?php } else { ?>
+										<i class="fa-solid fa-heart" onclick="likePost(event, <?php echo $post['id'] ?>)"></i>
+									<?php } ?>
+									<span id="<?php echo $post['id'] ?>">
+										<?php echo count(getLikesOfPost($post['id'])) ?>
+									</span>
+								</div>
+								<!--
+								<div class="feed-comments">
+									<i class="fa-solid fa-comment-dots"></i>
+									210
+								</div> TODO: Add comments
+								-->
+							</span>
+							<div class="feed-date">
+								<span>
+									Il y a
+									<?php echo getCreationDatePost($post['id']) ?>
+								</span>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				<?php if ($countOfPost == 0) { ?>
+					<div class="feed-card">
+						Aucun post n'a été trouvé..
+					</div>
+				<?php } ?>
+			</div>
 		</main>
 	<?php } else { ?>
 		<h1>Vous n'êtes pas connecté..<br>
@@ -98,6 +172,7 @@ startSession();
 		</script>
 	<?php } ?>
 	<script src="../assets/js/login.js"></script>
+	<script src="../assets/js/feed.js"></script>
 </body>
 
 </html>

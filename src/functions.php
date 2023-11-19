@@ -81,6 +81,42 @@ function getId($username): array
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getPosts($username = null): array
+{
+    if ($username == null) {
+        $query = $GLOBALS['mysqlClientPDO']->prepare('SELECT * FROM posts ORDER BY creation_date DESC');
+        $query->execute();
+    } else {
+        $query = $GLOBALS['mysqlClientPDO']->prepare('SELECT * FROM posts WHERE creator_user_name = :username ORDER BY timestamp DESC');
+        $query->execute([
+            'username' => $username
+        ]);
+    }
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getUserByFullName($fullName): array
+{
+    if ($fullName) {
+        $query = $GLOBALS['mysqlClientPDO']->prepare('SELECT * FROM users WHERE user_name_full = :fullName');
+        $query->execute([
+            'fullName' => $fullName
+        ]);
+    }
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getUserByUsername($username): array
+{
+    if ($username) {
+        $query = $GLOBALS['mysqlClientPDO']->prepare('SELECT * FROM users WHERE user_name = :username');
+        $query->execute([
+            'username' => $username
+        ]);
+    }
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function getUserProfilePicture($username): string
 {
     if ($username) {
@@ -90,6 +126,75 @@ function getUserProfilePicture($username): string
         ]);
     }
     return $query->fetchAll(PDO::FETCH_ASSOC)[0]['user_profile_picture'];
+}
+
+function getLikesOfPost($postId): array|string
+{
+    if ($postId) {
+        $query = $GLOBALS['mysqlClientPDO']->prepare('SELECT likes FROM posts WHERE id = :postId');
+        $query->execute([
+            'postId' => $postId
+        ]);
+    }
+    $result = json_decode($query->fetchAll(PDO::FETCH_ASSOC)[0]["likes"], true);
+    if (!is_array($result)) {
+        return json_decode($result, true);
+    } else {
+        return $result;
+    }
+}
+
+function isLiked($postId, $username): bool
+{
+    getLikesOfPost($postId);
+    foreach (getLikesOfPost($postId) as $like) {
+        if ($like == $username) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function isPostExist($postId): bool
+{
+    if ($postId) {
+        $query = $GLOBALS['mysqlClientPDO']->prepare('SELECT * FROM posts WHERE id = :postId');
+        $query->execute([
+            'postId' => $postId
+        ]);
+    }
+    if (count($query->fetchAll(PDO::FETCH_ASSOC)) > 0) {
+        return true;
+    }
+    return false;
+}
+
+function getCreationDatePost($postId): string
+{
+    if ($postId) {
+        $query = $GLOBALS['mysqlClientPDO']->prepare('SELECT creation_date FROM posts WHERE id = :postId');
+        $query->execute([
+            'postId' => $postId
+        ]);
+    }
+    $timestampPost = $query->fetchAll(PDO::FETCH_ASSOC)[0]['creation_date'];
+    $datePost = new DateTime($timestampPost);
+    $dateNow = new DateTime();
+    $interval = $datePost->diff($dateNow);
+    if ($interval->y > 0) {
+        return $interval->y . ' ans';
+    } else if ($interval->m > 0) {
+        return $interval->m . ' mois';
+    } else if ($interval->d > 0) {
+        return $interval->d . ' jours';
+    } else if ($interval->h > 0) {
+        return $interval->h . ' heures';
+    } else if ($interval->i > 0) {
+        return $interval->i . ' minutes';
+    } else if ($interval->s > 0) {
+        return $interval->s . ' secondes';
+    }
+    return '0 secondes';
 }
 
 function getUserBackgroundPicture($username): string

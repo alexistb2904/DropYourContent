@@ -35,6 +35,7 @@ function UploadImage($image, $username, $imageWidth1)
     // Enregistrez l'image avec son extension d'origine
     file_put_contents($file_path . '.' . $extension, $image_content);
     // Chargez l'image en fonction de l'extension
+    $imageWebp = false;
     switch ($extension) {
         case 'png':
             $image = imagecreatefrompng($file_path . '.' . $extension);

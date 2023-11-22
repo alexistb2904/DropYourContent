@@ -4,7 +4,7 @@ include_once '../src/functions.php';
 
 startSession();
 
-if ($_GET['user']) {
+if (isset($_GET['user'])) {
     $userPage = $_GET['user'];
 } else {
     $userPage = 'alexistb2904';

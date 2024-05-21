@@ -80,6 +80,14 @@ DropYourContent est une application web de réseau social permettant aux utilisa
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
   COMMIT;
   ```
+
+## Preview
+
+![image](https://github.com/alexistb2904/DropYourContent/assets/59259007/5a53f9be-9a96-4e7a-832c-551d4b8867ca)
+![image](https://github.com/alexistb2904/DropYourContent/assets/59259007/4e31181a-8786-4295-b453-bb42e173aed6)
+![image](https://github.com/alexistb2904/DropYourContent/assets/59259007/0ca3a806-6873-4251-babe-489b0cb76ff5)
+
+
   
 
 ## Licence

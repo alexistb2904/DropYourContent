@@ -1,4 +1,4 @@
-# DropYourContent - Réseau Social - Pas Fini et ne le sera surement pas
+# DropYourContent - Réseau Social - NON FINI
 
 DropYourContent est une application web de réseau social permettant aux utilisateurs de créer des publications, d'interagir avec du contenu, de personnaliser leurs profils, d'ajouter des amis, d'échanger des messages privés, de créer des comptes, de se connecter et de se déconnecter.
 
